@@ -106,7 +106,7 @@ FROM (
 	COUNT(ORDER_ID) AS CUSTOMERS
 	FROM ORDERS 
 	GROUP BY 1,2) AS O;-- SUBQUERY IN THE FROM STATEMENT
--- ON AVERAGE OF 60 CUSTOMER WILL COME TO STORE PER DAY
+-- ON AVERAGE  60 CUSTOMERS WILL COME TO THE STORE EVERY DAY
 
 
 -- FINDING THE PEAK HOUR OF THE STORE
@@ -116,8 +116,8 @@ FROM
     ORDERS
 GROUP BY 1
 ORDER BY 1;
-/* 12TH - 13TH HOUR AND  17TH - 18TH HOUR ARE PEAK HOURS OF THE STORE 
-WHEN THERE MAY BE NEED OF MORE STAFF AND INGREDIENTS */
+/* 12TH - 13TH HOUR AND  17TH - 18TH HOUR ARE PEAK HOURS OF THE STORE
+AS THE NUMBER OF ORDERS ARE VERY HIGH*/
 
 
 --  FINDING THE NUMBER PIZZAS IN EACH ORDER
@@ -183,6 +183,9 @@ Best Selling            : The Classic Deluxe Pizza   - 2453 Pizzas
 Highest Revenue Earning : The Thai Chicken Pizza      - $43434
 Least Selling           : The Brie Carre Pizza        - 490 Pizzas
 Highest Average Revenue : The Brie Carre  Pizza       - 23.65 Dollars per pizza
+
+The Brie Carre Pizza is The Costliest Pizza Costing about $23.65 for small size.
+The Pizza store also sells only Small Size Brie Carre Pizza.
  */
 
 
@@ -209,8 +212,11 @@ SUM(revenue) over( PARTITION BY quarter) as Quarterly_REV,
 SUM(REVENUE) OVER() AS TOTAL_REVENUE
 FROM TREND;
 /*
-THERE IS A TREND OF INCREASING AND DECREASING IN SALES CONSECUTIVELY 
-JULY MONTH HAS HIGHEST SALES WHILE OCTOBER MONTH HAS LOWEST SALES
+There is no significant change in the revenue  over the year.  
+Reductionin sales and Increasing  in sale s are almost the
+JULY Month has highest revenue and sales - 1935  orders
+OCTOBER month has lowest revenue and sales - 1646 orders.
+In Third Quarter, The decrease in sales is consequent which leads to lowest sales in October 
 */
 
 
@@ -290,6 +296,9 @@ GROUP BY 1
 ORDER BY 2 DESC
 ;
 
+/* We have seen that 12 pm,1 pm ,5 pm and  6pm are the peak hours 
+In that time period, Classic Pizza Types are the most selling.
+*/
 
 -- TOP PIZZAS THAT ARE SOLD TOGETHER
 with  t1 as (
@@ -324,8 +333,13 @@ from order_details as od
 	 Group by 1
      order by 3 desc
      LIMIT 6;
-/* THE BIG MEAT PIZZA , THE THAI CHICKEN PIZZA, THE FIVE CHEESE PIZZA, 
-THE FOUR CHEESE PIZZA, THE CLASSIC DELUXE PIZZA
+
+/* The Pizzas that are mostly sold together are
+	THE BIG MEAT PIZZA , 
+	THE THAI CHICKEN PIZZA, 
+	THE FIVE CHEESE PIZZA, 
+	THE FOUR CHEESE PIZZA, 
+	THE CLASSIC DELUXE PIZZA
 */     
 
 -- TOTAL SALES ON EACH WEEKDAY 
@@ -338,4 +352,7 @@ FROM
     order_details ON orders.order_id = order_details.order_id
 GROUP BY 1
 ORDER BY 2 DESC;
+
 -- FRIDAY AND SATURDAY HAS HIGHEST SALES OF PIZZAS
+-- Friday -8106
+-- Saturday - 7355
