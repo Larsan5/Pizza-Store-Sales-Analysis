@@ -167,7 +167,8 @@ SELECT
                 WHEN pizzas.size = 'L' THEN (ORDER_DETAILS.QUANTITY * PIZZAS.PRICE)
                 ELSE NULL
             END)) AS revenue_L_Size,
-    ROUND(SUM(ORDER_DETAILS.QUANTITY * PIZZAS.PRICE)) AS REVENUE
+    ROUND(SUM(ORDER_DETAILS.QUANTITY * PIZZAS.PRICE)) AS REVENUE,
+    ROUND(SUM(ORDER_DETAILS.QUANTITY * PIZZAS.PRICE) / SUM(ORDER_DETAILS.quantity),2)  as Average_Revenue
 FROM
     order_details
         LEFT JOIN
@@ -176,11 +177,12 @@ FROM
     pizza_types ON pizza_types.pizza_type_id = PIZZAS.pizza_type_id
 GROUP BY 1 , 2
 ORDER BY 8 DESC;
+
 /*
-BEST SELLING:  The Classic Deluxe Pizza IS THE BEST SELLING BASED ON SALES AND The Thai Chicken Pizza IS HIGHEST CONTRIBUTOR
-TO THE REVENUE
-WORST SELLING: The Brie Carre Pizza IS THE WORST SELLING AND LEAST CONTRIBUTOR TO THE REVENUE
-OTHER INSIGHT: THERE ARE OTHER PIZZAS THAT ARE DOING WELL EVEN THOUGH ONLY ONE SIZE VARIANT ARE SELLING
+Best Selling            : The Classic Deluxe Pizza   - 2453 Pizzas
+Highest Revenue Earning : The Thai Chicken Pizza      - $43434
+Least Selling           : The Brie Carre Pizza        - 490 Pizzas
+Highest Average Revenue : The Brie Carre  Pizza       - 23.65 Dollars per pizza
  */
 
 
